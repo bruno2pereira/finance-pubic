@@ -21,6 +21,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}  # Usa o token criado
           publish_dir: .  # Como o repositório já contém o build, usamos a raiz
           publish_branch: gh-pages
           force_orphan: true
