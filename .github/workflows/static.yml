@@ -43,7 +43,7 @@ jobs:
         uses: actions/deploy-pages@v4
       - name: Install dependencies and build
         run: |
-          npm install
+          apt install npm
           npm install -g @quasar/cli
 
       - name: Build Quasar project
