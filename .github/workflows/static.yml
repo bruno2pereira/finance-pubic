@@ -43,5 +43,15 @@ jobs:
         uses: actions/deploy-pages@v4
       - name: Install dependencies and build
         run: |
-          quasar serve
+          npm install
+          npm install -g @quasar/cli
+
+      - name: Build Quasar project
+        run: quasar build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './' # Certifique-se de que esta é a pasta correta
+
           
