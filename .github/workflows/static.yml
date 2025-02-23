@@ -1,10 +1,10 @@
-name: Deploy Quasar to GitHub Pages
+name: Deploy Quasar Build to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Ajusta para a tua branch principal
-  workflow_dispatch:  # Permite rodar manualmente pelo GitHub Actions
+      - main  # Aciona o deploy quando há push na branch main
+  workflow_dispatch:  # Permite rodar manualmente no GitHub Actions
 
 permissions:
   contents: read
@@ -18,20 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List files in repo
-        run: ls -la  # Debug para garantir que package.json está presente
-
-      - name: Install dependencies and build Quasar
-        run: |
-          npm install -g @quasar/cli  # Instala o Quasar CLI globalmente
-          npm install  # Instala as dependências do projeto
-          quasar build  # Constrói a aplicação
-
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist/spa  # Garante que o caminho está correto
-
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .  # Como o repositório já contém o build, usamos a raiz
+          publish_branch: gh-pages
+          force_orphan: true
