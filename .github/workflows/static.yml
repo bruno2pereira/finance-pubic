@@ -41,17 +41,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Install dependencies and build
-        run: |
-          apt install npm
-          npm install -g @quasar/cli
-
-      - name: Build Quasar project
-        run: quasar build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './' # Certifique-se de que esta é a pasta correta
+      - name: Setup Quasar
+  # You may pin to the exact commit or the version.
+  # uses: joshstrange/setup-quasar@35f247113004c44d5ce8a3e9a4133b78f9383404
+        uses: joshstrange/setup-quasar@1.0.0
 
           
+
+    
